@@ -48,7 +48,42 @@ const customerQuestions = [{
 
 function customerSale() {
         inquirer.prompt(customerQuestions).then(answers =>{
-            console.log(answers);
-            connection.end();
+            customerSaleResult(answers);
         })
     };
+
+function customerSaleResult(answers){
+    connection.query("SELECT * FROM products", function (err, results){
+        if (err) throw err;
+        if (parseInt (answers.customerProductSelect) === results.product_id){
+            productSale();
+        } else {
+            console.log("That ID does not match current stock.");
+        };
+    });
+};
+
+function productSale(answers){
+    if (parseInt (answers.customerPurchaseAmount) <= results.stock_quantity){
+        connection.query("UPDATE products SET ? WHERE ?",
+        [
+            {
+                stock_quantity: stock_quantity - answers.customerPurchaseAmount
+            },
+            {
+                product_id: answers.customerProductSelect
+            }
+        ],
+        function (error){
+            if (error) throw err;
+            console.log("Item purchased successfully.");
+            connection.end();
+        })
+    } else {
+        console.log ("There is not enough product for that purchase.");
+        connection.end();
+    };
+};
+
+//function to output total price of sale to customer
+    //closes connection if sale is successful
