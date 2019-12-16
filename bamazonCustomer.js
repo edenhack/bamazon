@@ -1,5 +1,9 @@
 const mysql = require("mysql");
-const {table} = require("table");
+const {
+    table
+} = require("table");
+const inquirer = require("inquirer");
+
 const connection = mysql.createConnection({
     host: "localhost",
     port: 3306,
@@ -26,6 +30,25 @@ function customerDisplay() {
                 ...data
             ];
             console.log(table(tableData));
-            connection.end();
+            customerSale();
         });
-}
+};
+
+const customerQuestions = [{
+        type: "input",
+        name: "customerProductSelect",
+        message: "What product would you like to buy?",
+    },
+    {
+        type: "input",
+        name: "customerPurchaseAmount",
+        message: "How much product would you like to buy?",
+    }
+];
+
+function customerSale() {
+        inquirer.prompt(customerQuestions).then(answers =>{
+            console.log(answers);
+            connection.end();
+        })
+    };
