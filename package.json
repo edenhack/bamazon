@@ -1,0 +1,23 @@
+{
+  "name": "bamazon",
+  "version": "1.0.0",
+  "description": "bamazon test products customer application",
+  "main": "bamazonCustomer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edenhack/bamazon.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/edenhack/bamazon/issues"
+  },
+  "homepage": "https://github.com/edenhack/bamazon#readme",
+  "dependencies": {
+    "mysql": "^2.17.1",
+    "table": "^5.4.6"
+  }
+}
